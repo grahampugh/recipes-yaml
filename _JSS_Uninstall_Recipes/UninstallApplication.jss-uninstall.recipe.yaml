@@ -3,17 +3,17 @@ Comment: |
 Description: Uploads a pkg to the JSS, and creates a Self-Service Policy available to members of a Testing group.
 Identifier: com.github.grahampugh.recipes.jss-uninstall.UninstallApplication
 ParentRecipe: com.github.grahampugh.recipes.jss-script.UninstallApplication
-MinimumVersion: 1.0.0
+MinimumVersion: "2.3"
 
 Input:
   NAME: ++ADD APPLICATION NAME HERE++
   CATEGORY: Uninstallers
-  INSTALLED_GROUP_NAME: '%POLICY_NAME% installed'
+  INSTALLED_GROUP_NAME: "%POLICY_NAME% installed"
   INSTALLED_GROUP_TEMPLATE: SmartGroupTemplate-installed.xml
-  JSS_INVENTORY_NAME: '%NAME%.app'
+  JSS_INVENTORY_NAME: "%NAME%.app"
   PKG_ID: ++ADD PACKAGE ID e.g. com.apple.something.pkg++
-  PROD_NAME: '%NAME%'
-  SELF_SERVICE_ICON: '%NAME%.png'
+  PROD_NAME: "%NAME%"
+  SELF_SERVICE_ICON: "%NAME%.png"
   STOP_IF_NO_JSS_UPLOAD: false
   UNINSTALL_POLICY_CATEGORY: Uninstallers
   UNINSTALL_POLICY_TEMPLATE: PolicyTemplate-uninstall.xml
@@ -22,22 +22,22 @@ Input:
   UNINSTALL_SELF_SERVICE_INSTALL_BUTTON: Uninstall
   UNINSTALL_SELF_SERVICE_REINSTALL_BUTTON: Uninstall
   UNINSTALL_TRIGGERONLY_POLICY_CATEGORY: Triggered Uninstallers
-  UNINSTALL_TRIGGER_NAME: '%POLICY_NAME%-uninstall'
+  UNINSTALL_TRIGGER_NAME: "%POLICY_NAME%-uninstall"
 
 Process:
-- Processor: JSSImporter
-  Arguments:
-    category: '%UNINSTALL_POLICY_CATEGORY%'
-    groups:
-    - name: '%INSTALLED_GROUP_NAME%'
-      smart: true
-      template_path: '%INSTALLED_GROUP_TEMPLATE%'
-    jss_inventory_name: '%JSS_INVENTORY_NAME%'
-    pkg_path: ''
-    policy_category: '%UNINSTALL_POLICY_CATEGORY%'
-    policy_template: '%UNINSTALL_POLICY_TEMPLATE%'
-    prod_name: '%PROD_NAME%'
-    scripts:
-    - name: '%NAME%-uninstall.sh'
-      template_path: '%RECIPE_DIR%/%NAME%-ScriptTemplate-uninstall.xml'
-    self_service_icon: '%SELF_SERVICE_ICON%'
+  - Processor: JSSImporter
+    Arguments:
+      category: "%UNINSTALL_POLICY_CATEGORY%"
+      groups:
+        - name: "%INSTALLED_GROUP_NAME%"
+          smart: true
+          template_path: "%INSTALLED_GROUP_TEMPLATE%"
+      jss_inventory_name: "%JSS_INVENTORY_NAME%"
+      pkg_path: ""
+      policy_category: "%UNINSTALL_POLICY_CATEGORY%"
+      policy_template: "%UNINSTALL_POLICY_TEMPLATE%"
+      prod_name: "%PROD_NAME%"
+      scripts:
+        - name: "%NAME%-uninstall.sh"
+          template_path: "%RECIPE_DIR%/%NAME%-ScriptTemplate-uninstall.xml"
+      self_service_icon: "%SELF_SERVICE_ICON%"

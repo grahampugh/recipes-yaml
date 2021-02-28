@@ -5,7 +5,7 @@ Description: |
   Examples include 'en-US', 'de', 'ja-JP-mac', 'sv-SE', and 'zh-TW'
   No idea if all Firefox builds are available in all the same localizations, so you may need to verify that any particular combination is offered.
 Identifier: com.github.grahampugh.recipes.jamf.Firefox
-MinimumVersion: 2.0.0
+MinimumVersion: "2.3"
 ParentRecipe: com.github.autopkg.pkg.Firefox_EN
 
 Input:

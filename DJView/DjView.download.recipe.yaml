@@ -1,6 +1,6 @@
 Description: Downloads the latest version DjView.
 Identifier: com.github.grahampugh.recipes.download.DjView
-MinimumVersion: 0.2.9
+MinimumVersion: "2.3"
 
 Input:
   NAME: DjView
@@ -8,15 +8,15 @@ Input:
   SEARCH_URL: https://sourceforge.net/projects/djvu/rss?path=/DjVuLibre_MacOS
 
 Process:
-- Processor: URLTextSearcher
-  Arguments:
-    re_pattern: '%SEARCH_PATTERN%'
-    url: '%SEARCH_URL%'
+  - Processor: URLTextSearcher
+    Arguments:
+      re_pattern: "%SEARCH_PATTERN%"
+      url: "%SEARCH_URL%"
 
-- Processor: URLDownloader
-  Arguments:
-    CHECK_FILESIZE_ONLY: true
-    filename: '%NAME%-%dmgversion%.dmg'
-    url: '%url%'
+  - Processor: URLDownloader
+    Arguments:
+      CHECK_FILESIZE_ONLY: true
+      filename: "%NAME%-%dmgversion%.dmg"
+      url: "%url%"
 
-- Processor: EndOfCheckPhase
+  - Processor: EndOfCheckPhase

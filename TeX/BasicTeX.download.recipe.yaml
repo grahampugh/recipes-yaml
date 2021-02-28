@@ -1,6 +1,6 @@
 Description: Downloads the current version of BasicTeX, a reduced distribution of MacTeX.
 Identifier: com.github.grahampugh.recipes.download.BasicTeX
-MinimumVersion: 0.6.0
+MinimumVersion: "2.3"
 
 Input:
   NAME: BasicTeX
@@ -8,26 +8,26 @@ Input:
   STOPPROCESSINGIF_PREDICATE: download_changed == FALSE
 
 Process:
-- Processor: URLTextSearcher
-  Arguments:
-    re_pattern: The full MacTeX-(?P<version>.*) install
-    url: http://www.tug.org/mactex/morepackages.html
+  - Processor: URLTextSearcher
+    Arguments:
+      re_pattern: The full MacTeX-(?P<version>.*) install
+      url: http://www.tug.org/mactex/morepackages.html
 
-- Processor: URLDownloader
-  Arguments:
-    CHECK_FILESIZE_ONLY: true
-    url: '%DOWNLOAD_URL%'
+  - Processor: URLDownloader
+    Arguments:
+      CHECK_FILESIZE_ONLY: true
+      url: "%DOWNLOAD_URL%"
 
-- Processor: StopProcessingIf
-  Arguments:
-    predicate: '%STOPPROCESSINGIF_PREDICATE%'
+  - Processor: StopProcessingIf
+    Arguments:
+      predicate: "%STOPPROCESSINGIF_PREDICATE%"
 
-- Processor: CodeSignatureVerifier
-  Arguments:
-    expected_authority_names:
-    - 'Developer ID Installer: Richard Koch (RBGCY5RJWM)'
-    - Developer ID Certification Authority
-    - Apple Root CA
-    input_path: '%pathname%'
+  - Processor: CodeSignatureVerifier
+    Arguments:
+      expected_authority_names:
+        - "Developer ID Installer: Richard Koch (RBGCY5RJWM)"
+        - Developer ID Certification Authority
+        - Apple Root CA
+      input_path: "%pathname%"
 
-- Processor: EndOfCheckPhase
+  - Processor: EndOfCheckPhase

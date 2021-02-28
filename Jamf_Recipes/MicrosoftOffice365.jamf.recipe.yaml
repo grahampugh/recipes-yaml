@@ -1,6 +1,6 @@
 Description: Downloads the latest version of Microsoft Office 365 and makes a pkg. Then, uploads the package to the Jamf Pro Server and creates a Self Service Policy and Smart Group.
 Identifier: com.github.grahampugh.recipes.jamf.MicrosoftOffice365
-MinimumVersion: 2.0.0
+MinimumVersion: "2.3"
 ParentRecipe: com.github.grahampugh.recipes.pkg.MicrosoftOffice365
 
 Input:
