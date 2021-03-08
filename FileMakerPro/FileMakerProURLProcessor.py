@@ -1,5 +1,6 @@
-#!/usr/bin/env python
-# FilemakerProAdvancedUpdateURLProcessor.py
+#!/usr/local/autopkg/python
+
+# FilemakerProURLProcessor.py
 # adapted to enable selection of particular updates, from:
 # FilemakerUpdateURLProcessor.py
 # Fetches information about the latest FileMaker Pro updater.
@@ -19,7 +20,7 @@
 #
 
 
-"""See docstring for FilemakerUpdateURLProcessor class"""
+"""See docstring for FilemakerProURLProcessor class"""
 
 from __future__ import absolute_import
 
@@ -30,20 +31,17 @@ from operator import itemgetter
 
 from autopkglib import Processor, ProcessorError, URLGetter
 
-try:
-    from urllib.parse import urlsplit  # Python 3
-except ImportError:
-    from urllib2.urlparse import urlsplit  # Python 2
+from urllib.parse import urlsplit  # Python 3
 
-__all__ = ["FilemakerProAdvancedUpdateURLProcessor"]
+__all__ = ["FileMakerProURLProcessor"]
 
 # This was determined by reviewing the sources of the updates site at
 # https://www.claris.com/resources/downloads/
 UPDATE_FEED = "https://www.claris.com/resources/downloads/updaters/product-updaters.txt"
 
 
-class FilemakerProAdvancedUpdateURLProcessor(URLGetter):
-    """Provides a download URL for the most recent version of FileMaker Pro Advanced"""
+class FileMakerProURLProcessor(URLGetter):
+    """Provides a download URL for the most recent version of FileMaker Pro"""
 
     description = __doc__
     input_variables = {
@@ -87,10 +85,10 @@ class FilemakerProAdvancedUpdateURLProcessor(URLGetter):
                 updates.append(pkg)
         return updates
 
-    def extractAdvancedUpdates(self, obj):
+    def extractProUpdates(self, obj):
         updates = []
         for pkg in obj:
-            if re.search(r"Advanced", pkg["product"]):
+            if pkg["product"] == "FileMaker Pro ":
                 updates.append(pkg)
         return updates
 
@@ -137,14 +135,14 @@ class FilemakerProAdvancedUpdateURLProcessor(URLGetter):
                 (minor, build) = mo.groups()
             versions.append((major, minor, patch, version_str))
         sorted_versions = sorted(versions, key=itemgetter(0, 1, 2, 3), reverse=True)
-        version_str = versions[0][3]
+        version_str = sorted_versions[0][3]
         for pkg in obj:
             if pkg["version"] == version_str:
                 return pkg
         return None
 
-    def getLatestFilemakerProAdvancedInstaller(self, defined_version=None):
-        version_str = self.env.get("major_version")
+    def getLatestFilemakerProInstaller(self, defined_version=None):
+        # version_str = self.env.get("major_version")
         try:
             data = self.download(UPDATE_FEED)
         except Exception as e:
@@ -153,7 +151,7 @@ class FilemakerProAdvancedUpdateURLProcessor(URLGetter):
         metadata = json.loads(data)
         # extract all the Mac updates
         mac_updates = self.extractMacUpdates(metadata)
-        mac_updates = self.extractAdvancedUpdates(mac_updates)
+        mac_updates = self.extractProUpdates(mac_updates)
         mac_updates = self.extractMajorUpdates(mac_updates)
         if defined_version:
             mac_updates = self.extractDefinedUpdates(mac_updates, defined_version)
@@ -174,8 +172,8 @@ class FilemakerProAdvancedUpdateURLProcessor(URLGetter):
         try:
             url = ""
             defined_version = self.env.get("version")
-            update = self.getLatestFilemakerProAdvancedInstaller(defined_version)
-            version_str = self.env.get("major_version")
+            update = self.getLatestFilemakerProInstaller(defined_version)
+            # version_str = self.env.get("major_version")
             update["version"] = self.version_matcher(update["url"])
             url = update["url"]
 
@@ -190,5 +188,5 @@ class FilemakerProAdvancedUpdateURLProcessor(URLGetter):
 
 
 if __name__ == "__main__":
-    PROCESSOR = FilemakerProAdvancedUpdateURLProcessor()
+    PROCESSOR = FileMakerProURLProcessor()
     PROCESSOR.execute_shell()
