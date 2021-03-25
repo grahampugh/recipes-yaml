@@ -6,7 +6,6 @@ MinimumVersion: "2.3"
 
 Input:
   NAME: DataWarrior
-  BUNDLE_ID: org.openmolecules.datawarrior
   DOWNLOAD_URL: http://www.openmolecules.org/datawarrior/download.html
 
 Process:

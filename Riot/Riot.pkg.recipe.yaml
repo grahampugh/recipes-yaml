@@ -5,11 +5,10 @@ MinimumVersion: "2.3"
 
 Input:
   NAME: Riot
-  BUNDLE_ID: im.riot.app
 
 Process:
   - Processor: DeprecationWarning
     Arguments:
-      warning_message: This recipe has been deprecated, as Riot has been renamed to Element (Riot). Please use the Element recipes instead.
+      warning_message: This recipe has been deprecated, as Riot has been renamed to Element. Please use the Element recipes instead.
 
   - Processor: AppPkgCreator
