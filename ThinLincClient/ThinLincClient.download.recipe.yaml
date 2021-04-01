@@ -21,10 +21,6 @@ Process:
       filename: ThinLincClient.iso
       url: "%SITE_URL%%match%"
 
-  - Processor: StopProcessingIf
-    Arguments:
-      predicate: "%STOPPROCESSINGIF_PREDICATE%"
-
   - Processor: EndOfCheckPhase
 
   - Processor: CodeSignatureVerifier
