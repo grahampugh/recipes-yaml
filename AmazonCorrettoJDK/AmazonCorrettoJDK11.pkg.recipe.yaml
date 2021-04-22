@@ -6,7 +6,7 @@ MinimumVersion: "2.3"
 Input:
   NAME: Amazon Corretto 11
   SEARCH_PATTERN: (?P<url>https://.*?amazon-corretto-11.*?-macosx-x64\.tar\.gz)
-  SEARCH_URL: https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html
+  SEARCH_URL: https://github.com/corretto/corretto-11/releases
 
 Process:
   - Processor: PkgRootCreator
