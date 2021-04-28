@@ -27,8 +27,3 @@ Process:
     Arguments:
       input_path: "%pathname%/ThinLinc Client.app"
       requirement: identifier "se.cendio.tlclient" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = PHUT6TWL4H
-
-  - Processor: Versioner
-    Arguments:
-      input_plist_path: "%pathname%/ThinLinc Client.app/Contents/Info.plist"
-      plist_version_key: CFBundleShortVersionString
