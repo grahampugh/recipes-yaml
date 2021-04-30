@@ -95,7 +95,7 @@ class LastRecipeRunChecker(Processor):
         self.env["url"] = data["url"]
         self.env["PKG_CATEGORY"] = data["category"]
         self.env["LAST_RUN_POLICY_NAME"] = data["policy_name"]
-        self.env["SELFSERVICE_DESCRIPTION"] = data["self_service_description"]
+        self.env["LAST_RUN_SELFSERVICE_DESCRIPTION"] = data["self_service_description"]
 
         # make sure the package actually exists
         if not os.path.exists(self.env["pkg_path"]):
