@@ -61,7 +61,9 @@ class LastRecipeRunChecker(Processor):
         },
         "PKG_CATEGORY": {"description": ("The package category.")},
         "LAST_RUN_POLICY_NAME": {"description": ("The policy_name.")},
-        "SELFSERVICE_DESCRIPTION": {"description": ("The self-service description.")},
+        "LAST_RUN_SELFSERVICE_DESCRIPTION": {
+            "description": ("The self-service description.")
+        },
     }
 
     description = __doc__
