@@ -543,7 +543,7 @@ class JamfPackageUploader(Processor):
         self.pkg_uploaded = False
         self.pkg_metadata_updated = False
 
-        #  create a dictionary of package metadata from the inputs
+        # create a dictionary of package metadata from the inputs
         self.pkg_category = self.env.get("pkg_category")
         self.reboot_required = self.env.get("reboot_required")
         if not self.reboot_required or self.reboot_required == "False":

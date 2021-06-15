@@ -254,7 +254,9 @@ class JamfPolicyUploader(Processor):
                         replacement_key = self.env.get(found_key)
                     data = data.replace(f"%{found_key}%", replacement_key)
                 else:
-                    self.output(f"WARNING: '{found_key}' has no replacement object!",)
+                    self.output(
+                        f"WARNING: '{found_key}' has no replacement object!",
+                    )
                     raise ProcessorError("Unsubstituable key in template found")
         return data
 
@@ -280,12 +282,14 @@ class JamfPolicyUploader(Processor):
         if r.status_code == 200:
             object_list = json.loads(r.output)
             self.output(
-                object_list, verbose_level=4,
+                object_list,
+                verbose_level=4,
             )
             obj_id = 0
             for obj in object_list[object_list_types[object_type]]:
                 self.output(
-                    obj, verbose_level=3,
+                    obj,
+                    verbose_level=3,
                 )
                 # we need to check for a case-insensitive match
                 if obj["name"].lower() == object_name.lower():
@@ -294,7 +298,7 @@ class JamfPolicyUploader(Processor):
 
     def get_path_to_file(self, filename):
         """AutoPkg is not very good at finding dependent files. This function
-        will look inside the search directories for any supplied file """
+        will look inside the search directories for any supplied file"""
         # if the supplied file is not a path, use the override directory or
         # ercipe dir if no override
         recipe_dir = self.env.get("RECIPE_DIR")
@@ -537,7 +541,11 @@ class JamfPolicyUploader(Processor):
                     verbose_level=1,
                 )
                 r = self.upload_policy(
-                    self.jamf_url, enc_creds, self.policy_name, template_xml, obj_id,
+                    self.jamf_url,
+                    enc_creds,
+                    self.policy_name,
+                    template_xml,
+                    obj_id,
                 )
                 self.policy_updated = True
             else:
@@ -549,7 +557,10 @@ class JamfPolicyUploader(Processor):
         else:
             # post the item
             r = self.upload_policy(
-                self.jamf_url, enc_creds, self.policy_name, template_xml,
+                self.jamf_url,
+                enc_creds,
+                self.policy_name,
+                template_xml,
             )
             self.policy_updated = True
 
