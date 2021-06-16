@@ -157,7 +157,7 @@ class JamfPolicyUploader(Processor):
                 headers = file.readlines()
             existing_headers = [x.strip() for x in headers]
             for header in existing_headers:
-                if "APBALANCEID" in header:
+                if "APBALANCEID" in header or "AWSALB" in header:
                     with open(cookie_jar, "w") as fp:
                         fp.write(header)
         except IOError:
@@ -169,7 +169,7 @@ class JamfPolicyUploader(Processor):
                 headers = file.readlines()
             existing_headers = [x.strip() for x in headers]
             for header in existing_headers:
-                if "APBALANCEID" in header:
+                if "APBALANCEID" in header or "AWSALB" in header:
                     cookie = header.split()[1].rstrip(";")
                     self.output(f"Existing cookie found: {cookie}", verbose_level=2)
                     curl_cmd.extend(["--cookie", cookie])
@@ -254,9 +254,7 @@ class JamfPolicyUploader(Processor):
                         replacement_key = self.env.get(found_key)
                     data = data.replace(f"%{found_key}%", replacement_key)
                 else:
-                    self.output(
-                        f"WARNING: '{found_key}' has no replacement object!",
-                    )
+                    self.output(f"WARNING: '{found_key}' has no replacement object!",)
                     raise ProcessorError("Unsubstituable key in template found")
         return data
 
@@ -282,14 +280,12 @@ class JamfPolicyUploader(Processor):
         if r.status_code == 200:
             object_list = json.loads(r.output)
             self.output(
-                object_list,
-                verbose_level=4,
+                object_list, verbose_level=4,
             )
             obj_id = 0
             for obj in object_list[object_list_types[object_type]]:
                 self.output(
-                    obj,
-                    verbose_level=3,
+                    obj, verbose_level=3,
                 )
                 # we need to check for a case-insensitive match
                 if obj["name"].lower() == object_name.lower():
@@ -541,11 +537,7 @@ class JamfPolicyUploader(Processor):
                     verbose_level=1,
                 )
                 r = self.upload_policy(
-                    self.jamf_url,
-                    enc_creds,
-                    self.policy_name,
-                    template_xml,
-                    obj_id,
+                    self.jamf_url, enc_creds, self.policy_name, template_xml, obj_id,
                 )
                 self.policy_updated = True
             else:
@@ -557,10 +549,7 @@ class JamfPolicyUploader(Processor):
         else:
             # post the item
             r = self.upload_policy(
-                self.jamf_url,
-                enc_creds,
-                self.policy_name,
-                template_xml,
+                self.jamf_url, enc_creds, self.policy_name, template_xml,
             )
             self.policy_updated = True
 
