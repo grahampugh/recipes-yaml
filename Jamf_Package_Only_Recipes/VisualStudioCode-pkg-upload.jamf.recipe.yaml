@@ -1,0 +1,13 @@
+Description: Downloads the latest version of Visual Studio Code and makes a pkg. Then, uploads to the Jamf Pro Server.
+Identifier: com.github.grahampugh.recipes.jamf.VisualStudioCode-pkg-upload
+Input:
+  CATEGORY: Productivity
+MinimumVersion: 2.0.0
+ParentRecipe: com.github.killahquam.pkg.visualstudioscode
+Process:
+- Arguments:
+    category_name: '%CATEGORY%'
+  Processor: com.github.grahampugh.jamf-upload.processors/JamfCategoryUploader
+- Arguments:
+    pkg_category: '%CATEGORY%'
+  Processor: com.github.grahampugh.jamf-upload.processors/JamfPackageUploader
