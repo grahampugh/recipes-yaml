@@ -9,20 +9,18 @@ Input:
   GROUP_NAME: "%NAME%-update-smart"
   GROUP_TEMPLATE: SmartGroup-update-smart-EA-regex.xml
   EXTENSION_ATTRIBUTE_NAME: "%NAME% Version"
-  EXTENSION_ATTRIBUTE_SCRIPT: ExtensionAttribute-CFBundleShortVersionString.sh
+  EXTENSION_ATTRIBUTE_SCRIPT: ExtensionAttribute-CFBundleVersion.sh
   TESTING_GROUP_NAME: Testing
   POLICY_CATEGORY: Testing
   POLICY_TEMPLATE: Policy-install-latest.xml
   POLICY_NAME: "Install Latest %NAME%"
+  POLICY_RUN_COMMAND: "echo 'Installation of %NAME% complete'"
   SELF_SERVICE_DISPLAY_NAME: "Install Latest %NAME%"
   SELF_SERVICE_DESCRIPTION: Microsoft Edge is a fast, simple, and secure web browser, built for the modern web.
   SELF_SERVICE_ICON: "%NAME%.png"
   INSTALL_BUTTON_TEXT: "Install %version%"
   REINSTALL_BUTTON_TEXT: "Install %version%"
   UPDATE_PREDICATE: "pkg_uploaded == False"
-  replace_policy: "True"
-  replace_group: "True"
-  replace_ea: "True"
 
 Process:
   - Processor: com.github.grahampugh.jamf-upload.processors/JamfCategoryUploader

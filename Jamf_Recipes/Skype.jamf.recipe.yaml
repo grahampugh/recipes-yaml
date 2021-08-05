@@ -14,15 +14,13 @@ Input:
   POLICY_CATEGORY: Testing
   POLICY_TEMPLATE: Policy-install-latest.xml
   POLICY_NAME: "Install Latest %NAME%"
+  POLICY_RUN_COMMAND: "echo 'Installation of %NAME% complete'"
   SELF_SERVICE_DISPLAY_NAME: "Install Latest %NAME%"
   SELF_SERVICE_DESCRIPTION: Skype is a freemium voice over IP service and instant messaging client, currently developed by Microsoft-owned Skype Technologies.
   SELF_SERVICE_ICON: "%NAME%.png"
   INSTALL_BUTTON_TEXT: "Install %version%"
   REINSTALL_BUTTON_TEXT: "Install %version%"
   UPDATE_PREDICATE: "pkg_uploaded == False"
-  replace_policy: "True"
-  replace_group: "True"
-  replace_ea: "True"
 
 Process:
   - Processor: com.github.grahampugh.jamf-upload.processors/JamfCategoryUploader

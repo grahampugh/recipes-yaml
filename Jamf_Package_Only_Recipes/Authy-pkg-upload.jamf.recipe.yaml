@@ -1,6 +1,6 @@
 Description: Downloads the latest version of Authy and makes a pkg. Then, uploads to the Jamf Pro Server.
 Identifier: com.github.grahampugh.recipes.jamf.Authy-pkg-upload
-MinimumVersion: 2.3.0
+MinimumVersion: "2.3"
 ParentRecipe: com.github.nzmacgeek.pkg.authy
 
 Input:

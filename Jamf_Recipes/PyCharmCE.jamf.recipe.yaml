@@ -12,14 +12,13 @@ Input:
   POLICY_CATEGORY: Testing
   POLICY_TEMPLATE: Policy-install-latest.xml
   POLICY_NAME: "Install Latest %NAME%"
+  POLICY_RUN_COMMAND: "echo 'Installation of %NAME% complete'"
   SELF_SERVICE_DISPLAY_NAME: "Install Latest %NAME%"
   SELF_SERVICE_DESCRIPTION: PyCharm CE the community edition of an Integrated Development Environment (IDE) used for programming in Python. It provides code analysis, a graphical debugger, an integrated unit tester, integration with version control systems (VCS), and supports web development with Django.
   SELF_SERVICE_ICON: "%NAME%.png"
   INSTALL_BUTTON_TEXT: "Install %version%"
   REINSTALL_BUTTON_TEXT: "Install %version%"
   UPDATE_PREDICATE: "pkg_uploaded == False"
-  replace_policy: "True"
-  replace_group: "True"
 
 Process:
   - Processor: com.github.grahampugh.jamf-upload.processors/JamfCategoryUploader
