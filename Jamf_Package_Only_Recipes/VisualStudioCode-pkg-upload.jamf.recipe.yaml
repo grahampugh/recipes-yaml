@@ -2,7 +2,7 @@ Description: Downloads the latest version of Visual Studio Code and makes a pkg.
 Identifier: com.github.grahampugh.recipes.jamf.VisualStudioCode-pkg-upload
 Input:
   CATEGORY: Productivity
-MinimumVersion: 2.0.0
+MinimumVersion: 2.3.0
 ParentRecipe: com.github.killahquam.pkg.visualstudioscode
 Process:
 - Arguments:
