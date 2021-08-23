@@ -9,6 +9,17 @@ Input:
 
 Process:
   - Arguments:
+      archive_format: tar_bzip2
+      archive_path: "%pathname%"
+      destination_path: "%RECIPE_CACHE_DIR%/unzip"
+    Processor: Unarchiver
+
+  - Arguments:
       app_path: "%RECIPE_CACHE_DIR%/downloads/%NAME%/*.app"
       force_pkg_build: true
     Processor: AppPkgCreator
+
+  - Processor: PathDeleter
+    Arguments:
+      path_list:
+        - "%RECIPE_CACHE_DIR%/unzip"
