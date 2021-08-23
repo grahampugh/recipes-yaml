@@ -29,6 +29,7 @@ Process:
       archive_format: tar_bzip2
       archive_path: "%pathname%"
       destination_path: "%RECIPE_CACHE_DIR%/unzip"
+      purge_destination: True
     Comment: Unzipping for code signature verification. Path must be deleted afterwards to prevent unzipping over existing version.
     Processor: Unarchiver
 
@@ -36,8 +37,3 @@ Process:
       input_path: "%RECIPE_CACHE_DIR%/unzip/FileZilla.app"
       requirement: identifier "org.filezilla-project.filezilla" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "5VPGKXL75N"
     Processor: CodeSignatureVerifier
-
-  - Processor: PathDeleter
-    Arguments:
-      path_list:
-        - "%RECIPE_CACHE_DIR%/unzip"
