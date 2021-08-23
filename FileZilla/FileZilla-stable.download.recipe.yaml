@@ -26,10 +26,6 @@ Process:
   - Processor: EndOfCheckPhase
 
   - Arguments:
-      predicate: "%STOPPROCESSINGIF_PREDICATE%"
-    Processor: StopProcessingIf
-
-  - Arguments:
       archive_format: tar_bzip2
       archive_path: "%pathname%"
       destination_path: "%RECIPE_CACHE_DIR%/unzip"
