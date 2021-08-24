@@ -18,6 +18,7 @@ Input:
   POLICY_CATEGORY: Testing
   POLICY_TEMPLATE: Policy-install-latest-MicrosoftOffice365.xml
   POLICY_NAME: "Install Latest %NAME%"
+  POLICY_RUN_COMMAND: "echo 'Installation of %NAME% complete'"
   SCRIPT_NAME: Microsoft Office License Removal Tool.sh
   PARAMETER4_TITLE: "--All or --O365 or --Volume"
   PARAMETER5_TITLE: "--ForceClose"
@@ -40,10 +41,6 @@ Input:
   INSTALL_BUTTON_TEXT: "Install %version%"
   REINSTALL_BUTTON_TEXT: "Install %version%"
   UPDATE_PREDICATE: "pkg_uploaded == False"
-  replace_policy: "True"
-  replace_group: "True"
-  replace_script: "True"
-  curl: "True"
 
 Process:
   - Processor: com.github.grahampugh.jamf-upload.processors/JamfCategoryUploader
