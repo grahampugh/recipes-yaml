@@ -34,7 +34,30 @@ Input:
   VENDOR: adoptium
 
 Process:
+  - Processor: FlatPkgUnpacker
+    Arguments:
+      flat_pkg_path: "%pathname%"
+      destination_path: "%RECIPE_CACHE_DIR%/unpack"
+      purge_destination: True
+
+  - Processor: PkgPayloadUnpacker
+    Arguments:
+      pkg_payload_path: "%RECIPE_CACHE_DIR%/unpack/net.temurin.8.jdk.pkg/Payload"
+      destination_path: "%RECIPE_CACHE_DIR%/payload"
+      purge_destination: False
+
+  - Processor: Versioner
+    Arguments:
+      input_plist_path: "%RECIPE_CACHE_DIR%/payload/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Info.plist"
+      plist_version_key: CFBundleVersion
+
   - Processor: PkgCopier
     Arguments:
-      pkg_path: "%RECIPE_CACHE_DIR%/EclipseTemurin_%FEATURE_VERSION%_%IMAGE_TYPE%_%ARCH%_%JVM_IMPLEMENTATION%-%version%"
+      pkg_path: "%RECIPE_CACHE_DIR%/EclipseTemurin_%FEATURE_VERSION%_%IMAGE_TYPE%_%ARCH%_%JVM_IMPLEMENTATION%-%version%.pkg"
       source_pkg: "%pathname%"
+
+  - Processor: PathDeleter
+    Arguments:
+      path_list:
+        - "%RECIPE_CACHE_DIR%/unpack"
+        - "%RECIPE_CACHE_DIR%/payload"
