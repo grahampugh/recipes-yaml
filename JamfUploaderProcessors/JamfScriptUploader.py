@@ -310,7 +310,7 @@ class JamfScriptUploader(Processor):
             obj_id = 0
             for obj in r.output["results"]:
                 self.output(f"ID: {obj['id']} NAME: {obj['name']}", verbose_level=3)
-                if obj["name"] == object_name:
+                if obj["name"].lower() == object_name.lower():
                     obj_id = obj["id"]
             return obj_id
 
@@ -336,13 +336,15 @@ class JamfScriptUploader(Processor):
                     )
                     data = data.replace(f"%{found_key}%", self.env.get(found_key))
                 else:
-                    self.output(f"WARNING: '{found_key}' has no replacement object!",)
+                    self.output(
+                        f"WARNING: '{found_key}' has no replacement object!",
+                    )
                     raise ProcessorError("Unsubstituable key in template found")
         return data
 
     def get_path_to_file(self, filename):
         """AutoPkg is not very good at finding dependent files. This function will look
-        inside the search directories for any supplied file """
+        inside the search directories for any supplied file"""
         # if the supplied file is not a path, use the override directory or
         # ercipe dir if no override
         recipe_dir = self.env.get("RECIPE_DIR")
@@ -429,10 +431,12 @@ class JamfScriptUploader(Processor):
             url = "{}/uapi/v1/scripts".format(jamf_url)
 
         self.output(
-            "Script data:", verbose_level=2,
+            "Script data:",
+            verbose_level=2,
         )
         self.output(
-            script_data, verbose_level=2,
+            script_data,
+            verbose_level=2,
         )
 
         self.output("Uploading script..")
@@ -442,7 +446,8 @@ class JamfScriptUploader(Processor):
         while True:
             count += 1
             self.output(
-                "Script upload attempt {}".format(count), verbose_level=2,
+                "Script upload attempt {}".format(count),
+                verbose_level=2,
             )
             method = "PUT" if obj_id else "POST"
             r = self.curl(method, url, token, script_json)
@@ -531,7 +536,8 @@ class JamfScriptUploader(Processor):
             "Checking for existing '{}' on {}".format(self.script_name, self.jamf_url)
         )
         self.output(
-            "Full path: {}".format(self.script_path), verbose_level=2,
+            "Full path: {}".format(self.script_path),
+            verbose_level=2,
         )
         obj_id = self.get_uapi_obj_id_from_name(
             self.jamf_url, "scripts", self.script_name, token
