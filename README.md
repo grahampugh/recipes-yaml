@@ -1,15 +1,10 @@
 # grahampugh-recipes in yaml format
 
-A few recipes not found elsewhere. To use them, enter the following command:
+## Deprecation Warning
 
-    autopkg repo-add grahampugh/recipes-yaml
+This repo is no longer maintained, as all recipes at [autopkg/grahampugh-recipes](https://github.com/autopkg/grahampugh-recipes) are now migrated to yaml format.
 
-Note that some recipes in this repo are designed to help package up software that is not publicly available. As such, those recipes have no `.download` recipe. Those recipes have their own `README` files to give further instruction.
+Please migrate to the above repo using the following commands
 
-## Wait, these are all yaml files!
-
-I write my recipes as `yaml` files, and then convert them to `plist` format when I'm done. I find constructing the recipes much nicer in `yaml` format, and it ensures a consistent `plist` structure (e.g. alphabetised input keys).
-
-If, on the other hand, you are interested in this technique, take a look at https://github.com/grahampugh/plist-yaml-plist
-
-The recipes in plist format are available at autopkg/grahampugh-recipes
+    autopkg repo-delete grahampugh/recipes-yaml
+    autopkg repo-add grahampugh-recipes
