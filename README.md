@@ -1,10 +1,9 @@
 # grahampugh-recipes in yaml format
 
-## Deprecation Warning
+## These are the yaml versions of Jamf recipes from autopkg/grahampugh-recipes
 
-This repo is no longer maintained, as all recipes at [autopkg/grahampugh-recipes](https://github.com/autopkg/grahampugh-recipes) are now migrated to yaml format.
+All Jamf recipes at [autopkg/grahampugh-recipes](https://github.com/autopkg/grahampugh-recipes) are currently in Plist format to allow AutoPkgr to see them.
 
-Please migrate to the above repo using the following commands
+These are the YAML versions of those recipes. They are intended only as a documentation resource. I do not recommend that you add this repo to your AutoPkg search directories, because it may interfere with JamfUploader.
 
-    autopkg repo-delete grahampugh/recipes-yaml
-    autopkg repo-add grahampugh-recipes
+
